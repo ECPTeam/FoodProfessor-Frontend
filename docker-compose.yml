@@ -7,8 +7,12 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./front:/usr/src/food_professor
+      - yarn-cache:/usr/local/share/.cache/yarn/v6
     command: sh -c "yarn start"
     environment:
       - CHOKIDAR_USEPOLLING=true
     ports:
       - "8000:3000"
+
+volumes:
+  yarn-cache:

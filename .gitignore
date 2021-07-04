@@ -4,39 +4,6 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
-/.vscode
-
-#------------------back------------------
-
-# Ignore bundler config.
-/api/.bundle
-
-# Ignore all logfiles and tempfiles.
-/api/log/*
-/api/tmp/*
-!/api/log/.keep
-!/api/tmp/.keep
-
-# Ignore pidfiles, but keep the directory.
-/api/tmp/pids/*
-!/api/tmp/pids/
-!/api/tmp/pids/.keep
-
-# Ignore uploaded files in development.
-/api/storage/*
-!/api/storage/.keep
-/api/.byebug_history
-
-# Ignore master key for decrypting credentials and more.
-/api/config/master.key
-
-#/api/.env
-
-/api/vendor
-
-#/.env
-
-
 #------------------ front-------------------
 
 # dependencies
