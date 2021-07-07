@@ -5,7 +5,6 @@ import CommonLayout from 'components/layouts/CommonLayout'
 import Top from 'pages/Top'
 import Register from 'pages/Register'
 import Login from 'pages/Login'
-
 import { getCurrentUser } from 'lib/api/auth'
 import { User } from 'types/index'
 

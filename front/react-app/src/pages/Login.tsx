@@ -2,46 +2,19 @@ import React, { useState, useContext } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
-import { makeStyles, Theme } from '@material-ui/core/styles'
 import { Typography } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
-import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 
 import { AuthContext } from 'App'
 import { login } from 'lib/api/auth'
 import { LoginParams } from 'types/index'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    marginTop: theme.spacing(6),
-  },
-  submitBtn: {
-    marginTop: theme.spacing(2),
-    flexGrow: 1,
-    textTransform: 'none',
-  },
-  header: {
-    textAlign: 'center',
-  },
-  card: {
-    padding: theme.spacing(2),
-    maxWidth: 400,
-  },
-  box: {
-    marginTop: '2rem',
-  },
-  link: {
-    textDecoration: 'none',
-  },
-}))
-
 // サインイン用ページ
 const Login: React.FC = () => {
-  const classes = useStyles()
   const history = useHistory()
 
   const { setIsLoggedIn, setCurrentUser } = useContext(AuthContext)
@@ -82,14 +55,15 @@ const Login: React.FC = () => {
   return (
     <>
       <form noValidate autoComplete="off">
-        <Card className={classes.card}>
-          <CardHeader className={classes.header} title="Sign In" />
+        <Card className="px-10 py-2 max-w-xl text-center">
+          <CardHeader title="ログイン" />
           <CardContent>
             <TextField
+              className="mb-8"
               variant="outlined"
               required
               fullWidth
-              label="Email"
+              label="メールアドレス"
               value={email}
               margin="dense"
               onChange={(event) => setEmail(event.target.value)}
@@ -98,32 +72,25 @@ const Login: React.FC = () => {
               variant="outlined"
               required
               fullWidth
-              label="Password"
+              label="パスワード"
               type="password"
-              placeholder="At least 6 characters"
+              placeholder="6文字以上"
               value={password}
               margin="dense"
               autoComplete="current-password"
               onChange={(event) => setPassword(event.target.value)}
             />
-            <Button
+            <button
               type="submit"
-              variant="contained"
-              size="large"
-              fullWidth
-              color="default"
-              disabled={!email || !password ? true : false} // 空欄があった場合はボタンを押せないように
-              className="m-10"
+              disabled={!email || !password ? true : false}
+              className="mt-8 mb-4 px-10 py-2 rounded-full bg-lightGreen text-white"
               onClick={handleSubmit}
             >
-              Submit
-            </Button>
-            <Box textAlign="center" className={classes.box}>
+              ログイン
+            </button>
+            <Box textAlign="center" className="mt-2">
               <Typography variant="body2">
-                Don't have an account? &nbsp;
-                <Link to="/register" className={classes.link}>
-                  Sign Up now!
-                </Link>
+                <Link to="/register">アカウントをお持ちでないですか？</Link>
               </Typography>
             </Box>
           </CardContent>

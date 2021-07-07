@@ -2,36 +2,14 @@ import React, { useContext } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
-import { makeStyles, Theme } from '@material-ui/core/styles'
-
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
-import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
-
 import { Logout } from 'lib/api/auth'
 
 import { AuthContext } from 'App'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  iconButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-    textDecoration: 'none',
-    color: 'inherit',
-  },
-  linkBtn: {
-    textTransform: 'none',
-  },
-}))
+import MainLogo from 'images/logo.png'
 
 const Header: React.FC = () => {
   const { loading, isLoggedIn, setIsLoggedIn } = useContext(AuthContext)
-  const classes = useStyles()
   const history = useHistory()
 
   const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -62,19 +40,15 @@ const Header: React.FC = () => {
     if (!loading) {
       if (isLoggedIn) {
         return (
-          <Button color="inherit" className={classes.linkBtn} onClick={handleLogout}>
+          <button color="inherit" onClick={handleLogout}>
             Sign out
-          </Button>
+          </button>
         )
       } else {
         return (
           <>
-            <Button component={Link} to="/login" color="inherit" className={classes.linkBtn}>
-              Sign in
-            </Button>
-            <Button component={Link} to="/register" color="inherit" className={classes.linkBtn}>
-              Sign Up
-            </Button>
+            <button>Sign in</button>
+            <button>Sign Up</button>
           </>
         )
       }
@@ -84,19 +58,46 @@ const Header: React.FC = () => {
   }
 
   return (
-    <>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.iconButton} color="inherit">
-            <MenuIcon />
-          </IconButton>
-          <Typography component={Link} to="/" variant="h6" className={classes.title}>
-            Sample
-          </Typography>
-          <AuthButtons />
-        </Toolbar>
-      </AppBar>
-    </>
+    <div className="flex w-full h-20 bg-orange">
+      <div className="relative top-2 left-2 w-32 h-32">
+        <Link to="/top">
+          <img src={MainLogo} alt="main logo" />
+        </Link>
+      </div>
+
+      <form className="relative top-2 left-12">
+        <div className="flex">
+          <section className="w-24 h-9 bg-darkRed text-orange">
+            <p className="relative top-2.5 w-18 h-9 text-xs font-w6 text-center text-yellow-400">他ユーザー 🔽</p>
+          </section>
+          <input type="text" className="w-60 px-2" />
+          <button className="w-12 bg-lightGreen text-white">
+            <i className="fas fa-search" />
+          </button>
+        </div>
+        <div className="flex mt-1.5">
+          <span className="mr-2 py-1 px-3 bg-brown rounded-xl text-xs text-center text-orange">にんじん</span>
+          <span className="mr-2 py-1 px-3 bg-brown rounded-xl text-xs text-center text-orange">にんじん</span>
+          <span className="mr-2 py-1 px-3 bg-brown rounded-xl text-xs text-center text-orange">にんじん</span>
+          <span className="mr-2 py-1 px-3 bg-brown rounded-xl text-xs text-center text-orange">にんじん</span>
+          <span className="mr-2 py-1 px-3 bg-brown rounded-xl text-xs text-center text-orange">じゃがいも</span>
+        </div>
+      </form>
+
+      <div className="relative top-2 ml-auto mr-2">
+        <div className="flex">
+          <Link to="#" className="mt-4 mr-20 text-lg text-brown font-bold">
+            レシピ検索
+          </Link>
+          <Link to="/login" className="mt-4 mr-4 text-lg text-brown font-bold">
+            ログイン
+          </Link>
+          <Link to="/register" className="mt-4 mr-3 text-lg text-brown font-bold">
+            会員登録
+          </Link>
+        </div>
+      </div>
+    </div>
   )
 }
 

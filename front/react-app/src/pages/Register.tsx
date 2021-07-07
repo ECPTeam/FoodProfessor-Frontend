@@ -2,38 +2,17 @@ import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
-import { makeStyles, Theme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
-import Button from '@material-ui/core/Button'
 
 import { AuthContext } from 'App'
 import { register } from 'lib/api/auth'
 import { RegisterParams } from 'types/index'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    marginTop: theme.spacing(6),
-  },
-  submitBtn: {
-    marginTop: theme.spacing(2),
-    flexGrow: 1,
-    textTransform: 'none',
-  },
-  header: {
-    textAlign: 'center',
-  },
-  card: {
-    padding: theme.spacing(2),
-    maxWidth: 400,
-  },
-}))
-
 // サインアップ用ページ
 const Register: React.FC = () => {
-  const classes = useStyles()
   const history = useHistory()
 
   const { setIsLoggedIn, setCurrentUser } = useContext(AuthContext)
@@ -81,70 +60,69 @@ const Register: React.FC = () => {
   return (
     <>
       <form noValidate autoComplete="off">
-        <Card className={classes.card}>
-          <CardHeader className={classes.header} title="Sign Up" />
+        <Card className="px-10 py-2 max-w-xl text-center">
+          <CardHeader title="アカウント登録" />
           <CardContent>
+            <div className="flex justify-between">
+              <TextField
+                variant="outlined"
+                required
+                label="姓"
+                value={firstName}
+                margin="dense"
+                className="mr-2 mb-4"
+                onChange={(event) => setFirstName(event.target.value)}
+              />
+              <TextField
+                variant="outlined"
+                required
+                label="名"
+                value={lastName}
+                margin="dense"
+                onChange={(event) => setLastName(event.target.value)}
+              />
+            </div>
             <TextField
               variant="outlined"
               required
               fullWidth
-              label="Name"
-              value={firstName}
-              margin="dense"
-              onChange={(event) => setFirstName(event.target.value)}
-            />
-            <TextField
-              variant="outlined"
-              required
-              fullWidth
-              label="Name"
-              value={lastName}
-              margin="dense"
-              onChange={(event) => setLastName(event.target.value)}
-            />
-            <TextField
-              variant="outlined"
-              required
-              fullWidth
-              label="Email"
+              label="メールアドレス"
               value={email}
               margin="dense"
+              className="mb-4"
               onChange={(event) => setEmail(event.target.value)}
             />
             <TextField
               variant="outlined"
               required
               fullWidth
-              label="Password"
+              label="パスワード"
               type="password"
               value={password}
               margin="dense"
               autoComplete="current-password"
+              className="mb-4"
               onChange={(event) => setPassword(event.target.value)}
             />
             <TextField
               variant="outlined"
               required
               fullWidth
-              label="Password Confirmation"
+              label="パスワード(確認)"
               type="password"
               value={passwordConfirmation}
               margin="dense"
               autoComplete="current-password"
               onChange={(event) => setPasswordConfirmation(event.target.value)}
             />
-            <Button
+            <button
               type="submit"
-              variant="contained"
-              size="large"
-              fullWidth
-              color="default"
               disabled={!firstName || !lastName || !email || !password || !passwordConfirmation ? true : false}
-              className={classes.submitBtn}
+              className="mt-8 mb-4 px-10 py-2 rounded-full bg-lightGreen text-white"
               onClick={handleSubmit}
             >
-              Submit
-            </Button>
+              登録
+            </button>
           </CardContent>
         </Card>
       </form>
