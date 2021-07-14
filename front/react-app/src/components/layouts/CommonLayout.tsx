@@ -1,15 +1,8 @@
 import React from 'react'
 
 import { Container, Grid } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
 
 import Header from 'components/layouts/header'
-
-const useStyles = makeStyles(() => ({
-  container: {
-    marginTop: '3rem',
-  },
-}))
 
 type CommonLayoutProps = {
   children: React.ReactElement
@@ -17,7 +10,6 @@ type CommonLayoutProps = {
 
 // 全てのページで共通となるレイアウト
 const CommonLayout = ({ children }: CommonLayoutProps) => {
-  const classes = useStyles()
 
   return (
     <>
@@ -25,7 +17,7 @@ const CommonLayout = ({ children }: CommonLayoutProps) => {
         <Header />
       </header>
       <main>
-        <Container maxWidth="lg" className={classes.container}>
+        <Container maxWidth="lg" className="mt-12">
           <Grid container justify="center">
             <Grid item>{children}</Grid>
           </Grid>
