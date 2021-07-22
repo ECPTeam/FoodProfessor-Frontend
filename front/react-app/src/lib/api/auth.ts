@@ -1,7 +1,7 @@
 import client from 'lib/api/client'
 import Cookies from 'js-cookie'
 
-import { RegisterParams, LoginParams } from 'types/index'
+import { RegisterParams, LoginParams } from 'types/auth'
 
 // サインアップ（新規アカウント作成）
 export const register = (params: RegisterParams) => {

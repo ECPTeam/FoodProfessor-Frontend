@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 
 import CommonLayout from 'components/layouts/CommonLayout'
 import Top from 'pages/Top'
-import Register from 'pages/Register'
-import Login from 'pages/Login'
+import Register from 'pages/auth/Register'
+import Login from 'pages/auth/Login'
 import { getCurrentUser } from 'lib/api/auth'
-import { User } from 'types/index'
+import { User } from 'types/user'
 
 // グローバルで扱う変数・関数
 export const AuthContext = createContext(
@@ -68,11 +68,11 @@ const App: React.FC = () => {
       <AuthContext.Provider value={{ loading, setLoading, isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser }}>
         <CommonLayout>
           <Switch>
+            <Route exact path="/top" component={Top} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            <Private>
-              <Route exact path="/top" component={Top} />
-            </Private>
+            {/* <Private>
+            </Private> */}
           </Switch>
         </CommonLayout>
       </AuthContext.Provider>

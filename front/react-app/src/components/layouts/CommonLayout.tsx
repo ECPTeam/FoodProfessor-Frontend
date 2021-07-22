@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Container, Grid } from '@material-ui/core'
 
-import Header from 'components/layouts/header'
+import Header from 'components/layouts/Header'
 
 type CommonLayoutProps = {
   children: React.ReactElement
@@ -10,7 +10,6 @@ type CommonLayoutProps = {
 
 // 全てのページで共通となるレイアウト
 const CommonLayout = ({ children }: CommonLayoutProps) => {
-
   return (
     <>
       <header>
