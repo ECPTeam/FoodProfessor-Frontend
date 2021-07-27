@@ -32,7 +32,6 @@ const Login: React.FC = () => {
 
     try {
       const res = await login(params)
-      console.log(res)
 
       if (res.status === 200) {
         // ログインに成功した場合はCookieに各値を格納
@@ -44,8 +43,6 @@ const Login: React.FC = () => {
         setCurrentUser(res.data.data)
 
         history.push('/top')
-
-        console.log('Signed in successfully!')
       }
     } catch (err) {
       console.log(err)
@@ -82,7 +79,6 @@ const Login: React.FC = () => {
             />
             <button
               type="submit"
-              disabled={!email || !password ? true : false}
               className="mt-8 mb-4 px-10 py-2 rounded-full bg-lightGreen text-white"
               onClick={handleSubmit}
             >
@@ -90,7 +86,9 @@ const Login: React.FC = () => {
             </button>
             <Box textAlign="center" className="mt-2">
               <Typography variant="body2">
-                <Link to="/register">アカウントをお持ちでないですか？</Link>
+                <Link to="/register" className="hover:underline">
+                  アカウントをお持ちでないですか？
+                </Link>
               </Typography>
             </Box>
           </CardContent>

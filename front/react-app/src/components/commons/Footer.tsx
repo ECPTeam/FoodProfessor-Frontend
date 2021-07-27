@@ -15,9 +15,7 @@ const Footer: React.FC = () => {
           他のユーザーのレシピ
         </Link>
       </div>
-      <p className="mt-4 text-lg italic font-bolditalic text-center text-orange">
-        Copyright© ︎ECPTeam All RIghts Reserved.
-      </p>
+      <p className="mt-4 text-lg italic font-light text-center text-orange">Copyright© ︎ECPTeam All RIghts Reserved.</p>
     </div>
   )
 }

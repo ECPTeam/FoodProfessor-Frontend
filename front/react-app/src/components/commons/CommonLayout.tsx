@@ -1,9 +1,10 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 
 import { Container, Grid } from '@material-ui/core'
 
-import Header from 'components/layouts/Header'
-import Footer from 'components/layouts/Footer'
+import Header from 'components/commons/Header'
+import Footer from 'components/commons/Footer'
 
 type CommonLayoutProps = {
   children: React.ReactElement
@@ -11,6 +12,13 @@ type CommonLayoutProps = {
 
 // 全てのページで共通となるレイアウト
 const CommonLayout = ({ children }: CommonLayoutProps) => {
+  const history = useHistory()
+
+  // root_urlを/topに設定
+  if (history.location.pathname === '/') {
+    history.push('/top')
+  }
+
   return (
     <div className="relative min-h-screen">
       <header>

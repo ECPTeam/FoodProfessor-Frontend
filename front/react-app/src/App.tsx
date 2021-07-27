@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
-import CommonLayout from 'components/layouts/CommonLayout'
+import CommonLayout from 'components/commons/CommonLayout'
 import Top from 'pages/Top'
 import Register from 'pages/auth/Register'
 import Login from 'pages/auth/Login'
@@ -34,10 +34,6 @@ const App: React.FC = () => {
       if (res?.data.isLogin === true) {
         setIsLoggedIn(true)
         setCurrentUser(res?.data.data)
-
-        console.log(res?.data.data)
-      } else {
-        console.log('No current user')
       }
     } catch (err) {
       console.log(err)
