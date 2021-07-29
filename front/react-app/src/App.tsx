@@ -5,7 +5,7 @@ import CommonLayout from 'components/commons/CommonLayout'
 import Top from 'pages/Top'
 import Register from 'pages/auth/Register'
 import Login from 'pages/auth/Login'
-import { getCurrentUser } from 'lib/api/auth'
+import { getCurrentUser } from 'lib/apis/auth'
 import { User } from 'types/user'
 
 // グローバルで扱う変数・関数

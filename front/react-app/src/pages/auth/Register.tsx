@@ -8,7 +8,7 @@ import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
 
 import { AuthContext } from 'App'
-import { register } from 'lib/api/auth'
+import { register } from 'lib/apis/auth'
 import { RegisterParams } from 'types/auth'
 
 // サインアップ用ページ

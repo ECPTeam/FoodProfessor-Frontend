@@ -10,7 +10,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import Box from '@material-ui/core/Box'
 
 import { AuthContext } from 'App'
-import { login } from 'lib/api/auth'
+import { login } from 'lib/apis/auth'
 import { LoginParams } from 'types/auth'
 
 // サインイン用ページ
@@ -22,7 +22,7 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
-  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const postLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
 
     const params: LoginParams = {
@@ -80,7 +80,7 @@ const Login: React.FC = () => {
             <button
               type="submit"
               className="mt-8 mb-4 px-10 py-2 rounded-full bg-lightGreen text-white"
-              onClick={handleSubmit}
+              onClick={postLogin}
             >
               ログイン
             </button>

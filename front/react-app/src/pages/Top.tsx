@@ -1,10 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 
 import { AuthContext } from 'App'
+import { fetchTopData } from 'lib/apis/top'
 
 // とりあえず認証済みユーザーの名前やメールアドレスを表示
 const Top: React.FC = () => {
   const { isLoggedIn, currentUser } = useContext(AuthContext)
+
+  useEffect(() => {
+    fetchTopData()
+  })
 
   return (
     <>
