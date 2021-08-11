@@ -5,13 +5,13 @@ const Footer: React.FC = () => {
   return (
     <div className="absolute bottom-0 w-full h-26 px-6 py-4 mt-12 bg-brown">
       <div className="flex justify-around">
-        <Link to="#" className="text-lg font-w6 text-center text-orange">
+        <Link to="#" className="text-lg font-w6 text-center text-orange maxSm:hidden">
           トップ
         </Link>
-        <Link to="#" className="ml-20 text-lg font-w6 text-center text-orange">
+        <Link to="#" className="ml-20 text-lg font-w6 text-center text-orange maxSm:ml-0">
           Food Professorとは
         </Link>
-        <Link to="#" className="text-lg font-w6 text-center text-orange">
+        <Link to="#" className="text-lg font-w6 text-center text-orange maxSm:hidden">
           他のユーザーのレシピ
         </Link>
       </div>

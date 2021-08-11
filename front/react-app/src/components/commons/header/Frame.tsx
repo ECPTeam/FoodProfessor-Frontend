@@ -1,26 +1,26 @@
 import React, { useContext, useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
+
 import Cookies from 'js-cookie'
-
 import { Logout } from 'lib/apis/auth'
-
 import { AuthContext } from 'App'
 
 import MainLogo from 'images/logo.png'
 import DefaultIcon from 'images/defaultIcon.png'
-import SearchForm from 'components/commons/SearchForm'
+import SearchForm from 'components/commons/header/SearchForm'
+import BurgerMenu from 'components/commons/header/BurgerMenu'
 
 const Header: React.FC = () => {
   const { loading, currentUser, isLoggedIn, setIsLoggedIn } = useContext(AuthContext)
   const [isOpenUserMenu, setIsOpenUserMenu] = useState<boolean>(false)
   const history = useHistory()
 
-  const changeOpenUserMenu = () => {
+  const changeOpenUserMenu = (): void => {
     setIsOpenUserMenu(!isOpenUserMenu)
   }
 
   // windowのクリックでuserMenu閉じる
-  window.addEventListener('click', (e: any) => {
+  window.addEventListener('click', (e: any): void => {
     if (e.target.id === 'userIcon' || e.target.id === 'userMenu') return
     setIsOpenUserMenu(false)
   })
@@ -48,7 +48,7 @@ const Header: React.FC = () => {
     if (!loading) {
       if (isLoggedIn) {
         return (
-          <div className="flex">
+          <div className="flex maxLg:hidden">
             <Link to="#" className="mt-4 mr-8 text-lg text-darkRed font-bold">
               マイレシピ
             </Link>
@@ -67,7 +67,7 @@ const Header: React.FC = () => {
               onClick={changeOpenUserMenu}
             />
             <div
-              className="absolute top-20 right-0 w-40 h-32 px-4 bg-white border-4 rounded-xl border-orange z-10"
+              className="absolute top-20 right-4 w-40 h-32 px-4 bg-white border-4 rounded-xl border-orange z-10"
               id="userMenu"
               style={{ display: isOpenUserMenu ? '' : 'none' }}
             >
@@ -87,7 +87,7 @@ const Header: React.FC = () => {
         )
       } else {
         return (
-          <div className="flex">
+          <div className="flex maxMd:hidden">
             <Link to="/login" className="mt-4 mr-4 text-lg text-darkRed font-bold">
               ログイン
             </Link>
@@ -103,17 +103,23 @@ const Header: React.FC = () => {
   }
 
   return (
-    <div className="flex w-full h-20 bg-orange">
-      <div className="relative top-2 left-2 w-32 h-32">
-        <Link to="/top">
-          <img src={MainLogo} alt="main logo" />
-        </Link>
+    <div>
+      <div className={isLoggedIn ? 'minLg:hidden' : 'minMd:hidden'}>
+        <BurgerMenu right />
       </div>
 
-      <SearchForm />
+      <div className="flex w-full h-20 bg-orange">
+        <div className="relative top-2 left-2 w-32 h-32">
+          <Link to="/top">
+            <img src={MainLogo} alt="main logo" />
+          </Link>
+        </div>
 
-      <div className="relative top-2 ml-auto mr-2">
-        <AuthButtons />
+        <SearchForm />
+
+        <div className="relative top-2 ml-auto">
+          <AuthButtons />
+        </div>
       </div>
     </div>
   )

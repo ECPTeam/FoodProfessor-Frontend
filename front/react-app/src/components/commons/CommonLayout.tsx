@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 
 import { Container, Grid } from '@material-ui/core'
 
-import Header from 'components/commons/Header'
+import Header from 'components/commons/header/Frame'
 import Footer from 'components/commons/Footer'
 
 type CommonLayoutProps = {
@@ -25,7 +25,7 @@ const CommonLayout = ({ children }: CommonLayoutProps) => {
         <Header />
       </header>
       <main>
-        <Container maxWidth="lg" className="mt-12">
+        <Container maxWidth="lg">
           <Grid container justify="center">
             <Grid item>{children}</Grid>
           </Grid>
