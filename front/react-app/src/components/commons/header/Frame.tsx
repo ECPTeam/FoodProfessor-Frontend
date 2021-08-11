@@ -108,7 +108,7 @@ const Header: React.FC = () => {
         <BurgerMenu right />
       </div>
 
-      <div className="flex w-full h-20 bg-orange">
+      <div className="flex w-full h-20 bg-orange mb-8">
         <div className="relative top-2 left-2 w-32 h-32">
           <Link to="/top">
             <img src={MainLogo} alt="main logo" />

@@ -27,19 +27,17 @@ const BurgerMenu: React.FC<BurgerMenuProps> = (props) => {
     setIsOpenBurgerUserMenu(!isOpenBurgerUserMenu)
   }
 
+  window.addEventListener('click', (e: any): void => {
+    if (e.target.id === 'userIcon' || e.target.id === 'userMenu') return
+    setIsOpenBurgerUserMenu(false)
+  })
+
   // -------メニューアイテム（ユーザーアイコン以外）クリックでメニュー＆ユーザーメニュー閉じる--------
 
   const closeBurgerMenu = (): void => {
     setIsOpenBurgerMenu(false)
 
     setIsOpenBurgerUserMenu(false)
-    const burgerMenuWindow: HTMLElement | null = document.querySelector('.bm-menu-wrap')
-    if (burgerMenuWindow) {
-      burgerMenuWindow.addEventListener('click', (e: any): void => {
-        if (e.target.id === 'userIcon' || e.target.id === 'userMenu') return
-        setIsOpenBurgerUserMenu(false)
-      })
-    }
   }
 
   // メニューのstate(isOpen)を変更してメニュー閉じる
