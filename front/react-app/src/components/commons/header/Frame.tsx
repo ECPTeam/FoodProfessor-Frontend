@@ -15,11 +15,12 @@ const Header: React.FC = () => {
   const [isOpenUserMenu, setIsOpenUserMenu] = useState<boolean>(false)
   const history = useHistory()
 
+  // ユーザーメニュー表示切り替え
   const changeOpenUserMenu = (): void => {
     setIsOpenUserMenu(!isOpenUserMenu)
   }
 
-  // windowのクリックでuserMenu閉じる
+  // 画面クリックでユーザーメニュー非表示
   window.addEventListener('click', (e: any): void => {
     if (e.target.id === 'userIcon' || e.target.id === 'userMenu') return
     setIsOpenUserMenu(false)
@@ -58,14 +59,18 @@ const Header: React.FC = () => {
             <Link to="#" className="mt-4 mr-8 text-lg text-darkRed font-bold">
               カテゴリ一覧
             </Link>
-            <img
-              // プロフィール画像が存在しないならデフォルト画像表示
-              src={currentUser?.profile_image ? currentUser?.profile_image : DefaultIcon}
-              className="w-16 h-16 mr-4 cursor-pointer"
-              id="userIcon"
-              alt="icon"
-              onClick={changeOpenUserMenu}
-            />
+            {currentUser?.profileImage ? (
+              <img
+                // プロフィール画像が存在しないならデフォルト画像表示
+                src={currentUser?.profileImage.url ? currentUser?.profileImage.url : DefaultIcon}
+                className="w-16 h-16 mr-4 cursor-pointer"
+                id="userIcon"
+                alt="icon"
+                onClick={changeOpenUserMenu}
+              />
+            ) : (
+              <></>
+            )}
             <div
               className="absolute top-20 right-4 w-40 h-32 px-4 bg-white border-4 rounded-xl border-orange z-10"
               id="userMenu"

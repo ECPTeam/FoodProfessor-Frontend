@@ -1,8 +1,12 @@
 import applyCaseMiddleware from 'axios-case-converter'
 import axios from 'axios'
 
+type Option = {
+  ignoreHeaders: boolean
+}
+
 // ヘッダーに関してはケバブケースのままで良いので適用を無視するオプションを追加
-const options = {
+const options: Option = {
   ignoreHeaders: true,
 }
 

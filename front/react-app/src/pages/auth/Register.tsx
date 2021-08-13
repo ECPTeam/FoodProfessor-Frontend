@@ -11,7 +11,6 @@ import { AuthContext } from 'App'
 import { register } from 'lib/apis/auth'
 import { RegisterParams } from 'types/auth'
 
-// サインアップ用ページ
 const Register: React.FC = () => {
   const history = useHistory()
 
@@ -54,74 +53,72 @@ const Register: React.FC = () => {
   }
 
   return (
-    <>
-      <form noValidate autoComplete="off">
-        <Card className="px-10 py-2 max-w-xl text-center">
-          <CardHeader title="アカウント登録" />
-          <CardContent>
-            <div className="flex justify-between">
-              <TextField
-                variant="outlined"
-                required
-                label="姓"
-                value={firstName}
-                margin="dense"
-                className="mr-2 mb-4"
-                onChange={(event) => setFirstName(event.target.value)}
-              />
-              <TextField
-                variant="outlined"
-                required
-                label="名"
-                value={lastName}
-                margin="dense"
-                onChange={(event) => setLastName(event.target.value)}
-              />
-            </div>
+    <form noValidate autoComplete="off">
+      <Card className="px-14 maxSm:px-4 py-2 max-w-xl text-center mx-auto">
+        <CardHeader title="アカウント登録" />
+        <CardContent>
+          <div className="flex justify-between">
             <TextField
               variant="outlined"
               required
-              fullWidth
-              label="メールアドレス"
-              value={email}
+              label="姓"
+              value={firstName}
               margin="dense"
-              className="mb-4"
-              onChange={(event) => setEmail(event.target.value)}
+              className="mr-2 mb-4"
+              onChange={(event) => setFirstName(event.target.value)}
             />
             <TextField
               variant="outlined"
               required
-              fullWidth
-              label="パスワード"
-              type="password"
-              value={password}
+              label="名"
+              value={lastName}
               margin="dense"
-              autoComplete="current-password"
-              className="mb-4"
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={(event) => setLastName(event.target.value)}
             />
-            <TextField
-              variant="outlined"
-              required
-              fullWidth
-              label="パスワード(確認)"
-              type="password"
-              value={passwordConfirmation}
-              margin="dense"
-              autoComplete="current-password"
-              onChange={(event) => setPasswordConfirmation(event.target.value)}
-            />
-            <button
-              type="submit"
-              className="mt-8 mb-4 px-10 py-2 rounded-full bg-lightGreen text-white"
-              onClick={handleSubmit}
-            >
-              登録
-            </button>
-          </CardContent>
-        </Card>
-      </form>
-    </>
+          </div>
+          <TextField
+            variant="outlined"
+            required
+            fullWidth
+            label="メールアドレス"
+            value={email}
+            margin="dense"
+            className="mb-4"
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            required
+            fullWidth
+            label="パスワード"
+            type="password"
+            value={password}
+            margin="dense"
+            autoComplete="current-password"
+            className="mb-4"
+            onChange={(event) => setPassword(event.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            required
+            fullWidth
+            label="パスワード(確認)"
+            type="password"
+            value={passwordConfirmation}
+            margin="dense"
+            autoComplete="current-password"
+            onChange={(event) => setPasswordConfirmation(event.target.value)}
+          />
+          <button
+            type="submit"
+            className="mt-8 mb-4 px-10 py-2 rounded-full bg-lightGreen text-white"
+            onClick={handleSubmit}
+          >
+            登録
+          </button>
+        </CardContent>
+      </Card>
+    </form>
   )
 }
 

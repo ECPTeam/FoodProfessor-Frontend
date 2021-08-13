@@ -13,7 +13,6 @@ import { AuthContext } from 'App'
 import { login } from 'lib/apis/auth'
 import { LoginParams } from 'types/auth'
 
-// サインイン用ページ
 const Login: React.FC = () => {
   const history = useHistory()
 
@@ -50,51 +49,49 @@ const Login: React.FC = () => {
   }
 
   return (
-    <>
-      <form noValidate autoComplete="off">
-        <Card className="px-10 py-2 max-w-xl text-center">
-          <CardHeader title="ログイン" />
-          <CardContent>
-            <TextField
-              className="mb-8"
-              variant="outlined"
-              required
-              fullWidth
-              label="メールアドレス"
-              value={email}
-              margin="dense"
-              onChange={(event) => setEmail(event.target.value)}
-            />
-            <TextField
-              variant="outlined"
-              required
-              fullWidth
-              label="パスワード"
-              type="password"
-              placeholder="6文字以上"
-              value={password}
-              margin="dense"
-              autoComplete="current-password"
-              onChange={(event) => setPassword(event.target.value)}
-            />
-            <button
-              type="submit"
-              className="mt-8 mb-4 px-10 py-2 rounded-full bg-lightGreen text-white"
-              onClick={postLogin}
-            >
-              ログイン
-            </button>
-            <Box textAlign="center" className="mt-2">
-              <Typography variant="body2">
-                <Link to="/register" className="hover:underline">
-                  アカウントをお持ちでないですか？
-                </Link>
-              </Typography>
-            </Box>
-          </CardContent>
-        </Card>
-      </form>
-    </>
+    <form noValidate autoComplete="off">
+      <Card className="px-14 maxSm:px-4 py-2 max-w-xl text-center mx-auto">
+        <CardHeader title="ログイン" />
+        <CardContent>
+          <TextField
+            className="mb-8"
+            variant="outlined"
+            required
+            fullWidth
+            label="メールアドレス"
+            value={email}
+            margin="dense"
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            required
+            fullWidth
+            label="パスワード"
+            type="password"
+            placeholder="6文字以上"
+            value={password}
+            margin="dense"
+            autoComplete="current-password"
+            onChange={(event) => setPassword(event.target.value)}
+          />
+          <button
+            type="submit"
+            className="mt-8 mb-4 px-10 py-2 rounded-full bg-lightGreen text-white"
+            onClick={postLogin}
+          >
+            ログイン
+          </button>
+          <Box textAlign="center" className="mt-2">
+            <Typography variant="body2">
+              <Link to="/register" className="hover:underline">
+                アカウントをお持ちでないですか？
+              </Link>
+            </Typography>
+          </Box>
+        </CardContent>
+      </Card>
+    </form>
   )
 }
 

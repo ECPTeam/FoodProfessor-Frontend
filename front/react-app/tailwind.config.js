@@ -26,6 +26,10 @@ module.exports = {
       minMd: { min: '768px' },
       minSm: { min: '640px' },
     },
+    container: {
+      center: true,
+      padding: '1rem',
+    },
   },
   important: true,
 }

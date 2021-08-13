@@ -1,5 +1,3 @@
-import React from 'react'
-
 const SearchForm: React.FC = () => {
   return (
     <form className="relative top-2 left-6 maxSm:hidden">
