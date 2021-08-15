@@ -8,5 +8,4 @@ export type Recipe = {
   recipeImage?: RecipeImage
   recipeTime: number
   userId: number
-  folderId: number
 }

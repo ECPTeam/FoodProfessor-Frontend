@@ -1,10 +1,12 @@
 import React, { useState, useEffect, createContext } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import CommonLayout from 'components/commons/CommonLayout'
 import Top from 'pages/Top'
 import Register from 'pages/auth/Register'
 import Login from 'pages/auth/Login'
+import Profile from 'pages/users/Profile'
+import EditProfile from 'pages/users/EditProfile'
 import { getCurrentUser } from 'lib/apis/auth'
 import { User } from 'types/user'
 
@@ -47,17 +49,17 @@ const App: React.FC = () => {
   }, [setCurrentUser])
 
   // ユーザーが認証済みかどうかでルーティングを決定
-  // const Private = ({ children }: { children: React.ReactElement }) => {
-  //   if (!loading) {
-  //     if (isLoggedIn) {
-  //       return children
-  //     } else {
-  //       return <Redirect to="/login" />
-  //     }
-  //   } else {
-  //     return <></>
-  //   }
-  // }
+  const Private = ({ children }: { children: React.ReactElement }) => {
+    if (!loading) {
+      if (isLoggedIn) {
+        return children
+      } else {
+        return <Redirect to="/login" />
+      }
+    } else {
+      return <></>
+    }
+  }
 
   return (
     <Router>
@@ -67,8 +69,10 @@ const App: React.FC = () => {
             <Route exact path="/top" component={Top} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            {/* <Private>
-            </Private> */}
+            <Private>
+              <Route exact path="/users/:userId" component={Profile} />
+              <Route exact path="/auth/:userId/edit" component={EditProfile} />
+            </Private>
           </Switch>
         </CommonLayout>
       </AuthContext.Provider>

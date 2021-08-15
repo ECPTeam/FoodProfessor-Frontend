@@ -100,7 +100,7 @@ const BurgerMenu: React.FC<BurgerMenuProps> = (props: BurgerMenuProps) => {
             )}
             <div
               // isOpenBurgerUserMenuがtrueかfalseかで表示切り替え
-              className="relative top-2 right-0 w-40 h-36 px-4 bg-white border-4 rounded-xl border-orange"
+              className="relative top-2 right-0 w-40 h-24 pt-1 px-4 bg-white border-4 rounded-xl border-orange"
               id="userMenu"
               style={{ display: isOpenBurgerUserMenu ? '' : 'none' }}
             >
@@ -110,14 +110,6 @@ const BurgerMenu: React.FC<BurgerMenuProps> = (props: BurgerMenuProps) => {
                 onClick={closeBurgerMenu}
               >
                 マイページ
-              </Link>
-              <br />
-              <Link
-                to="#"
-                className="inline-block mt-2 pb-2 w-full text-md text-center border-b-2 border-orange"
-                onClick={closeBurgerMenu}
-              >
-                設定
               </Link>
               <br />
               <button className="mt-2 mb-2 ml-5 text-md text-center" onClick={logout}>

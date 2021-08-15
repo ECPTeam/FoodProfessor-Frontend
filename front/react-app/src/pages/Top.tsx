@@ -39,7 +39,6 @@ const Top: React.FC = () => {
               recipeImage={recipe.recipeImage}
               recipeTime={recipe.recipeTime}
               userId={recipe.userId}
-              folderId={recipe.folderId}
             />
           ))
         ) : (
@@ -62,7 +61,6 @@ const Top: React.FC = () => {
               recipeImage={recipe.recipeImage}
               recipeTime={recipe.recipeTime}
               userId={recipe.userId}
-              folderId={recipe.folderId}
             />
           ))
         ) : (

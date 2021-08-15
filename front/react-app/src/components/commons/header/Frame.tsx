@@ -72,16 +72,15 @@ const Header: React.FC = () => {
               <></>
             )}
             <div
-              className="absolute top-20 right-4 w-40 h-32 px-4 bg-white border-4 rounded-xl border-orange z-10"
+              className="absolute top-20 right-4 w-40 h-24 pt-1 px-4 bg-white border-4 rounded-xl border-orange z-10"
               id="userMenu"
               style={{ display: isOpenUserMenu ? '' : 'none' }}
             >
-              <Link to="#" className="inline-block mt-2 pb-2 w-full text-md text-center border-b-2 border-orange">
+              <Link
+                to={`/users/${currentUser?.id}`}
+                className="inline-block mt-2 pb-2 w-full text-md text-center border-b-2 border-orange"
+              >
                 マイページ
-              </Link>
-              <br />
-              <Link to="#" className="inline-block mt-2 pb-2 w-full text-md text-center border-b-2 border-orange">
-                設定
               </Link>
               <br />
               <button className="mt-2 mb-2 ml-5 text-md text-center" onClick={handleLogout}>
