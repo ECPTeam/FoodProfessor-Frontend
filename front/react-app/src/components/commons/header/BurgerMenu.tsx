@@ -1,12 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 
-import Cookies from 'js-cookie'
-import { Logout } from 'lib/apis/auth'
 import { AuthContext } from 'App'
 
-// import SearchForm from 'components/commons/header/SearchForm'
-import DefaultIcon from 'images/defaultIcon.png'
+import { DefaultIconUrl } from 'images/defaultIcon'
+import SearchForm from 'components/commons/header/SearchForm'
 import { slide as Menu } from 'react-burger-menu' // react-burger-menuというパッケージ
 
 type BurgerMenuProps = {
@@ -18,9 +16,10 @@ type BurgerMenuState = {
 }
 
 const BurgerMenu: React.FC<BurgerMenuProps> = (props: BurgerMenuProps) => {
-  const { loading, currentUser, isLoggedIn, setIsLoggedIn } = useContext(AuthContext)
+  const { loading, currentUser, isLoggedIn, handleLogout } = useContext(AuthContext)
   const [isOpenBurgerMenu, setIsOpenBurgerMenu] = useState<boolean>(false)
   const [isOpenBurgerUserMenu, setIsOpenBurgerUserMenu] = useState<boolean>(false)
+
   const history = useHistory()
 
   // ユーザーメニュー表示切り替え
@@ -47,28 +46,10 @@ const BurgerMenu: React.FC<BurgerMenuProps> = (props: BurgerMenuProps) => {
   }
   // ------------------------------------------------------------------------------------
 
-  // ログアウトと同時にバーガーメニュー閉じる(Frame.tsxにもhandleLogoutがあって不満)
-  const logout = (): void => {
+  // ログアウトと同時にバーガーメニュー閉じる
+  const closeBurgerMenuAndLogout = (): void => {
     handleLogout()
     closeBurgerMenu()
-  }
-
-  const handleLogout = async () => {
-    try {
-      const res = await Logout()
-
-      if (res.data.success === true) {
-        // サインアウト時には各Cookieを削除
-        Cookies.remove('_access_token')
-        Cookies.remove('_client')
-        Cookies.remove('_uid')
-
-        setIsLoggedIn(false)
-        history.push('/top')
-      }
-    } catch (err) {
-      console.log(err)
-    }
   }
 
   const AuthMenuItems = () => {
@@ -77,20 +58,17 @@ const BurgerMenu: React.FC<BurgerMenuProps> = (props: BurgerMenuProps) => {
       if (isLoggedIn) {
         return (
           <>
-            <Link to="#" className="bm-item menu-item" onClick={closeBurgerMenu}>
-              マイレシピ
-            </Link>
-            <Link to="#" className="bm-item menu-item" onClick={closeBurgerMenu}>
+            <div className="relative right-10 mb-12">
+              <SearchForm formStyles="relative top-6 left-10 ml-auto" closeBurgerMenu={closeBurgerMenu} />
+            </div>
+            <Link to="/recipe/create" className="mt-6 bm-item menu-item" onClick={closeBurgerMenu}>
               レシピ登録
-            </Link>
-            <Link to="#" className="bm-item menu-item" onClick={closeBurgerMenu}>
-              カテゴリ一覧
             </Link>
             {currentUser?.profileImage ? (
               <img
                 // プロフィール画像が存在しないならデフォルト画像表示
-                src={currentUser?.profileImage.url ? currentUser?.profileImage.url : DefaultIcon}
-                className="w-16 h-16 mr-4 cursor-pointer"
+                src={currentUser?.profileImage.url ? currentUser?.profileImage.url : DefaultIconUrl}
+                className="w-16 h-16 mt-6 mr-4 cursor-pointer rounded-full"
                 id="userIcon"
                 alt="icon"
                 onClick={changeOpenUserMenu}
@@ -105,14 +83,14 @@ const BurgerMenu: React.FC<BurgerMenuProps> = (props: BurgerMenuProps) => {
               style={{ display: isOpenBurgerUserMenu ? '' : 'none' }}
             >
               <Link
-                to="#"
+                to={`/users/${currentUser?.id}`}
                 className="inline-block mt-2 pb-2 w-full text-md text-center border-b-2 border-orange"
                 onClick={closeBurgerMenu}
               >
                 マイページ
               </Link>
               <br />
-              <button className="mt-2 mb-2 ml-5 text-md text-center" onClick={logout}>
+              <button className="mt-2 mb-2 ml-5 text-md text-center" onClick={closeBurgerMenuAndLogout}>
                 ログアウト
               </button>
             </div>
@@ -121,6 +99,12 @@ const BurgerMenu: React.FC<BurgerMenuProps> = (props: BurgerMenuProps) => {
       } else {
         return (
           <>
+            <div className="relative right-10 mb-12">
+              <SearchForm formStyles="relative top-6 left-10 ml-auto" closeBurgerMenu={closeBurgerMenu} />
+            </div>
+            {/* <button className="bm-item menu-item" onClick={handleGuestLogin}>
+              ゲストログイン
+            </button> */}
             <Link to="/login" className="bm-item menu-item" onClick={closeBurgerMenu}>
               ログイン
             </Link>

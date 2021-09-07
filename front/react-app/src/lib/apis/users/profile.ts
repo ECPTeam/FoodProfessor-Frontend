@@ -1,9 +1,9 @@
 import client from 'lib/apis/client'
-import { ProfileUrl } from 'urls/index'
+import { profileUrl } from 'urls/index'
 
 export const fetchProfileData = (userId: number): Promise<any> => {
   return client
-    .get(ProfileUrl(userId))
+    .get(profileUrl(userId))
     .then((res) => {
       return res.data
     })

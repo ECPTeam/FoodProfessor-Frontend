@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import Header from 'components/commons/header/Frame'
@@ -11,6 +12,10 @@ type CommonLayoutProps = {
 const CommonLayout: React.FC<CommonLayoutProps> = ({ children }: CommonLayoutProps) => {
   const history = useHistory()
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   // root_urlを/topに設定
   if (history.location.pathname === '/') {
     history.push('/top')
@@ -18,10 +23,10 @@ const CommonLayout: React.FC<CommonLayoutProps> = ({ children }: CommonLayoutPro
 
   return (
     <div className="relative min-h-screen flex flex-col">
-      <header>
+      <header className="fixed w-full z-10">
         <Header />
       </header>
-      <main className="container flex-1">{children}</main>
+      <main className="container flex-1 mt-28">{children}</main>
       <footer>
         <Footer />
       </footer>

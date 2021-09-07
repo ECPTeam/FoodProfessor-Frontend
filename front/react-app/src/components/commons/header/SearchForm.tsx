@@ -1,31 +1,41 @@
-const SearchForm: React.FC = () => {
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+
+type formStyleTypes = {
+  formStyles: string
+  closeBurgerMenu: () => void
+}
+
+const SearchForm: React.FC<formStyleTypes> = (props) => {
+  const [recipeWard, setRecipeWard] = useState<string>('')
+
+  const history = useHistory()
+
+  const searchRecipes = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    props.closeBurgerMenu()
+
+    if (recipeWard === '') {
+      history.push(`/recipes/search/none`)
+    } else {
+      history.push(`/recipes/search/${recipeWard}`)
+    }
+    setRecipeWard('')
+  }
+
   return (
-    <form className="relative top-2 left-6 maxSm:hidden">
+    <form className={props.formStyles}>
       <div className="flex">
-        <section className="w-24 h-9 bg-darkRed text-orange">
-          <p className="relative top-2.5 w-18 h-9 text-xs font-w6 text-center text-yellow-400">他ユーザー 🔽</p>
-        </section>
-        <input type="text" className="w-60 px-2" />
-        <button className="w-12 bg-lightGreen text-white">
+        <input
+          type="text"
+          value={recipeWard}
+          className="w-60 h-8 px-2 rounded-l-sm border-t border-b border-l border-brown"
+          placeholder="レシピ名を入力"
+          onChange={(event) => setRecipeWard(event.target.value)}
+        />
+        <button className="w-12 bg-lightGreen text-white rounded-r-sm" onClick={searchRecipes}>
           <i className="fas fa-search" />
         </button>
-      </div>
-      <div className="flex mt-1.5">
-        <span className="h-6 mr-2 py-1 px-3 whitespace-nowrap bg-brown rounded-xl text-xs text-center text-orange">
-          にんじん
-        </span>
-        <span className="h-6 mr-2 py-1 px-3 whitespace-nowrap bg-brown rounded-xl text-xs text-center text-orange">
-          にんじん
-        </span>
-        <span className="h-6 mr-2 py-1 px-3 whitespace-nowrap bg-brown rounded-xl text-xs text-center text-orange">
-          にんじん
-        </span>
-        <span className="h-6 mr-2 py-1 px-3 whitespace-nowrap bg-brown rounded-xl text-xs text-center text-orange">
-          にんじん
-        </span>
-        <span className="h-6 mr-2 py-1 px-3 whitespace-nowrap bg-brown rounded-xl text-xs text-center text-orange">
-          じゃがいも
-        </span>
       </div>
     </form>
   )

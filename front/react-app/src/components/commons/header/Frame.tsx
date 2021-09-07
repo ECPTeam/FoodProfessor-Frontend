@@ -1,19 +1,23 @@
 import React, { useContext, useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 
-import Cookies from 'js-cookie'
-import { Logout } from 'lib/apis/auth'
 import { AuthContext } from 'App'
 
 import MainLogo from 'images/logo.png'
-import DefaultIcon from 'images/defaultIcon.png'
+import { DefaultIconUrl } from 'images/defaultIcon'
 import SearchForm from 'components/commons/header/SearchForm'
 import BurgerMenu from 'components/commons/header/BurgerMenu'
 
 const Header: React.FC = () => {
-  const { loading, currentUser, isLoggedIn, setIsLoggedIn } = useContext(AuthContext)
+  const { loading, currentUser, isLoggedIn, handleLogout } = useContext(AuthContext)
   const [isOpenUserMenu, setIsOpenUserMenu] = useState<boolean>(false)
+
   const history = useHistory()
+
+  // 空の関数(searchFormにバーガーメニューを閉じる関数をpropsで送りたいが、Frameの方は関係ない)
+  const empty = (): void => {
+    return
+  }
 
   // ユーザーメニュー表示切り替え
   const changeOpenUserMenu = (): void => {
@@ -26,44 +30,20 @@ const Header: React.FC = () => {
     setIsOpenUserMenu(false)
   })
 
-  const handleLogout = async () => {
-    try {
-      const res = await Logout()
-
-      if (res.data.success === true) {
-        // サインアウト時には各Cookieを削除
-        Cookies.remove('_access_token')
-        Cookies.remove('_client')
-        Cookies.remove('_uid')
-
-        setIsLoggedIn(false)
-        history.push('/top')
-      }
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
   const AuthButtons = () => {
     // 認証時によってボタン変更
     if (!loading) {
       if (isLoggedIn) {
         return (
-          <div className="flex maxLg:hidden">
-            <Link to="#" className="mt-4 mr-8 text-lg text-darkRed font-bold">
-              マイレシピ
-            </Link>
-            <Link to="#" className="mt-4 mr-8 text-lg text-darkRed font-bold">
+          <div className="flex maxMd:hidden">
+            <Link to="/recipe/create" className="mt-4 mr-10 text-lg text-darkRed font-bold">
               レシピ登録
-            </Link>
-            <Link to="#" className="mt-4 mr-8 text-lg text-darkRed font-bold">
-              カテゴリ一覧
             </Link>
             {currentUser?.profileImage ? (
               <img
                 // プロフィール画像が存在しないならデフォルト画像表示
-                src={currentUser?.profileImage.url ? currentUser?.profileImage.url : DefaultIcon}
-                className="w-16 h-16 mr-4 cursor-pointer"
+                src={currentUser?.profileImage.url ? currentUser?.profileImage.url : DefaultIconUrl}
+                className="w-14 h-14 mr-6 cursor-pointer rounded-full"
                 id="userIcon"
                 alt="icon"
                 onClick={changeOpenUserMenu}
@@ -92,10 +72,13 @@ const Header: React.FC = () => {
       } else {
         return (
           <div className="flex maxMd:hidden">
-            <Link to="/login" className="mt-4 mr-4 text-lg text-darkRed font-bold">
+            {/* <button className="mt-4 mr-6 text-lg text-darkRed font-bold" onClick={handleGuestLogin}>
+              ゲストログイン
+            </button> */}
+            <Link to="/login" className="mt-4 mr-6 text-lg text-darkRed font-bold">
               ログイン
             </Link>
-            <Link to="/register" className="mt-4 mr-3 text-lg text-darkRed font-bold">
+            <Link to="/register" className="mt-4 mr-6 text-lg text-darkRed font-bold">
               会員登録
             </Link>
           </div>
@@ -108,7 +91,7 @@ const Header: React.FC = () => {
 
   return (
     <div>
-      <div className={isLoggedIn ? 'minLg:hidden' : 'minMd:hidden'}>
+      <div className={isLoggedIn ? 'minMd:hidden' : 'minMd:hidden'}>
         <BurgerMenu right />
       </div>
 
@@ -119,10 +102,12 @@ const Header: React.FC = () => {
           </Link>
         </div>
 
-        <SearchForm />
+        <div className="flex ml-auto">
+          <SearchForm formStyles="relative top-6 mr-10 maxMd:hidden" closeBurgerMenu={empty} />
 
-        <div className="relative top-2 ml-auto">
-          <AuthButtons />
+          <div className="relative top-2">
+            <AuthButtons />
+          </div>
         </div>
       </div>
     </div>

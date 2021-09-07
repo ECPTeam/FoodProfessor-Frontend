@@ -1,7 +1,3 @@
-type ProfileImage = {
-  url: string | null
-}
-
 export type User = {
   id: number
   uid: string
@@ -9,7 +5,9 @@ export type User = {
   email: string
   firstName: string
   lastName: string
-  profileImage?: ProfileImage
+  profileImage: {
+    url: string
+  }
   allowPasswordChange: boolean
   createdAt: Date
   updatedAt: Date
