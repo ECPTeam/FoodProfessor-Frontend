@@ -37,6 +37,7 @@ const SearchRecipes: React.FC<any> = ({ match }) => {
                 recipeName={recipe.recipeName}
                 recipeImage={recipe.recipeImage}
                 recipeTime={recipe.recipeTime}
+                forHowManyPeople={recipe.forHowManyPeople}
                 createdAt={recipe.createdAt}
                 updatedAt={recipe.updatedAt}
                 userId={recipe.userId}

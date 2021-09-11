@@ -29,7 +29,7 @@ const SearchForm: React.FC<formStyleTypes> = (props) => {
         <input
           type="text"
           value={recipeWard}
-          className="w-60 h-8 px-2 rounded-l-sm border-t border-b border-l border-brown"
+          className="w-60 h-8 px-2 rounded-l-sm border-t border-b border-l border-brown focus:outline-none"
           placeholder="レシピ名を入力"
           onChange={(event) => setRecipeWard(event.target.value)}
         />

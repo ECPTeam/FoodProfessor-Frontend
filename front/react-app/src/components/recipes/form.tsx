@@ -15,6 +15,8 @@ type RecipeParamProps = {
   setRecipeName: (e: string) => void
   recipeTime: number
   setRecipeTime: (e: number) => void
+  forHowManyPeople: number
+  setForHowManyPeople: (e: number) => void
   setRecipeImage: (e: File) => void
   ingredientParams: ingredientParamsType[]
   setIngredientParams: (e: ingredientParamsType[]) => void
@@ -108,6 +110,7 @@ const RecipeForm: React.FC<RecipeParamProps> = (props) => {
                 variant="outlined"
                 required
                 fullWidth
+                label="レシピ名"
                 value={props.recipeName}
                 margin="dense"
                 className="mr-2 mb-4 max-w-xl"
@@ -115,12 +118,13 @@ const RecipeForm: React.FC<RecipeParamProps> = (props) => {
               />
             </div>
             <label htmlFor="recipeImage" className="mr-4 cursor-pointer">
-              レシピ画像（任意）
+              画像（任意）
             </label>
             <input
               accept="image/*,.png,.jpg,.jpeg,.gif"
               id="recipeImage"
               type="file"
+              className="mt-2"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 uploadRecipeImage(e)
               }}
@@ -128,6 +132,19 @@ const RecipeForm: React.FC<RecipeParamProps> = (props) => {
             <p className="w-28 mt-12 mb-4 py-2 text-center bg-darkRed rounded-full">
               <span className="font-bold text-orange">材料</span>
             </p>
+            <div>
+              <TextField
+                variant="outlined"
+                required
+                type="number"
+                inputProps={{ min: 0 }}
+                value={props.forHowManyPeople}
+                margin="dense"
+                className="mb-4 w-20"
+                onChange={(event) => props.setForHowManyPeople(Number(event.target.value))}
+              />
+              <span className="relative top-4 left-2 text-xl font-medium">人分</span>
+            </div>
             {/* numberOfIngredientForms(1)個フォームを表示し、ボタンで追加 */}
             {[...Array(props.numberOfIngredientForms)].map((_, index: number) => (
               <div key={index}>

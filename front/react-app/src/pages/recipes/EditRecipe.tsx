@@ -27,6 +27,7 @@ const EditRecipe: React.FC<any> = ({ match }) => {
 
   const [recipeName, setRecipeName] = useState<string>('')
   const [recipeTime, setRecipeTime] = useState<number>(0)
+  const [forHowManyPeople, setForHowManyPeople] = useState<number>(0)
   const [recipeImage, setRecipeImage] = useState<File>()
 
   const [ingredientParams, setIngredientParams] = useState<ingredientParamsType[]>([
@@ -41,6 +42,7 @@ const EditRecipe: React.FC<any> = ({ match }) => {
 
   // APIに接続してデータ取得
   useEffect(() => {
+    window.scrollTo(0, 0)
     fetchEditRecipeData(match.params.recipeId).then((data) => {
       // formDataでキャメルケースに変換できないためスネークケースで受け取る
       data.ingredients.map((columns: ingredientApiData) => {
@@ -52,6 +54,7 @@ const EditRecipe: React.FC<any> = ({ match }) => {
       setRecipe(data.recipe)
       setRecipeName(data.recipe.recipeName)
       setRecipeTime(data.recipe.recipeTime)
+      setForHowManyPeople(data.recipe.forHowManyPeople)
       setIngredientParams(data.ingredients)
       setNumberOfIngredientForms(data.ingredients.length)
       setCategories(data.categories)
@@ -71,6 +74,7 @@ const EditRecipe: React.FC<any> = ({ match }) => {
 
     formData.append('recipeName', recipeName)
     formData.append('recipeTime', String(recipeTime))
+    formData.append('forHowManyPeople', String(forHowManyPeople))
     if (recipeImage) formData.append('recipeImage', recipeImage)
 
     formData.append('ingredientParams', JSON.stringify(ingredientParams))
@@ -135,6 +139,8 @@ const EditRecipe: React.FC<any> = ({ match }) => {
         setRecipeName={setRecipeName}
         recipeTime={recipeTime}
         setRecipeTime={setRecipeTime}
+        forHowManyPeople={forHowManyPeople}
+        setForHowManyPeople={setForHowManyPeople}
         setRecipeImage={setRecipeImage}
         ingredientParams={ingredientParams}
         setIngredientParams={setIngredientParams}

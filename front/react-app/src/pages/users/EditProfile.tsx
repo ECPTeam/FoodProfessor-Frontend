@@ -37,6 +37,8 @@ const Profile: React.FC<any> = ({ match }) => {
   const [email, setEmail] = useState<string>('')
   const [profileImage, setProfileImage] = useState<File>()
 
+  const [isDisabled, setIsDisabled] = useState<boolean>(false)
+
   // APIに接続してデータ取得
   useEffect(() => {
     fetchEditProfileData(match.params.userId).then((data) => {
@@ -73,6 +75,7 @@ const Profile: React.FC<any> = ({ match }) => {
 
   const handleUpdate = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
+    setIsDisabled(true)
 
     if (isLoggedIn) {
       window.scrollTo(0, 0)
@@ -101,6 +104,7 @@ const Profile: React.FC<any> = ({ match }) => {
     } else {
       history.push('/login')
     }
+    setIsDisabled(false)
   }
 
   return (
@@ -198,6 +202,7 @@ const Profile: React.FC<any> = ({ match }) => {
                 type="submit"
                 className="mt-8 mb-4 px-10 py-2 rounded-full bg-lightGreen text-white"
                 onClick={handleUpdate}
+                disabled={isDisabled}
               >
                 更新
               </button>

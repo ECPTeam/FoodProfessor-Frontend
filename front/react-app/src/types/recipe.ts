@@ -5,6 +5,7 @@ export type Recipe = {
     url: string
   }
   recipeTime: number
+  forHowManyPeople: number
   userId: number
   createdAt: Date
   updatedAt: Date

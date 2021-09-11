@@ -137,6 +137,7 @@ const RecipeDetail: React.FC<any> = ({ match }) => {
               <p className="w-20 mb-4 py-2 text-center bg-darkRed rounded-full">
                 <span className="font-bold text-orange">材料</span>
               </p>
+              <p className="text-orange text-2xl font-medium">{recipe.forHowManyPeople}人分</p>
               <hr className="text-brown my-4" />
               {ingredients ? (
                 ingredients.map((ingredient: Ingredient, index: number) => (
@@ -154,6 +155,10 @@ const RecipeDetail: React.FC<any> = ({ match }) => {
           </div>
           <p className="w-32 mb-4 py-2 text-center bg-darkRed rounded-full">
             <span className="font-bold text-orange">作り方</span>
+          </p>
+          <p className="text-orange text-2xl font-medium mb-4">
+            <i className="far fa-clock mr-2"></i>
+            {recipe.recipeTime}分
           </p>
           {procedures ? (
             procedures.map((procedure: Procedure, index: number) => (

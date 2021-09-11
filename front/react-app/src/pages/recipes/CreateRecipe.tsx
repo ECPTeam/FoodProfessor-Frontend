@@ -21,6 +21,7 @@ const CreateRecipe: React.FC = () => {
 
   const [recipeName, setRecipeName] = useState<string>('')
   const [recipeTime, setRecipeTime] = useState<number>(0)
+  const [forHowManyPeople, setForHowManyPeople] = useState<number>(0)
   const [recipeImage, setRecipeImage] = useState<File>()
 
   const [ingredientParams, setIngredientParams] = useState<ingredientParamsType[]>([
@@ -45,6 +46,7 @@ const CreateRecipe: React.FC = () => {
 
     formData.append('recipeName', recipeName)
     formData.append('recipeTime', String(recipeTime))
+    formData.append('forHowManyPeople', String(forHowManyPeople))
     if (recipeImage) formData.append('recipeImage', recipeImage)
 
     formData.append('ingredientParams', JSON.stringify(ingredientParams))
@@ -109,6 +111,8 @@ const CreateRecipe: React.FC = () => {
         setRecipeName={setRecipeName}
         recipeTime={recipeTime}
         setRecipeTime={setRecipeTime}
+        forHowManyPeople={forHowManyPeople}
+        setForHowManyPeople={setForHowManyPeople}
         setRecipeImage={setRecipeImage}
         ingredientParams={ingredientParams}
         setIngredientParams={setIngredientParams}
